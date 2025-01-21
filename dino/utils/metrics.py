@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def calculate_IoU(y_true, y_pred, num_classes):
     """Calculate Intersection over Union (IoU) for each class and mean IoU."""
     ious = []
@@ -17,6 +18,7 @@ def calculate_IoU(y_true, y_pred, num_classes):
 
     return ious, np.mean(ious)
 
+
 def calculate_precision(y_true, y_pred, num_classes):
     """Calculate Precision for each class."""
     precisions = []
@@ -33,6 +35,7 @@ def calculate_precision(y_true, y_pred, num_classes):
             precisions.append(tp / (tp + fp))
 
     return precisions, np.mean(precisions)
+
 
 def calculate_pixel_accuracy(y_true, y_pred):
     """Calculate Pixel Accuracy."""
