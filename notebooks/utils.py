@@ -1,5 +1,6 @@
 from pycocotools import mask as maskUtils
 from typing import Tuple
+import matplotlib.pyplot as plt
 
 
 def decode_rle(rle_obj):
@@ -50,3 +51,28 @@ def area_from_annotation(ann, img_hw: Tuple[int, int]):
         if isinstance(rle, list):
             rle = maskUtils.merge(rle)
         return maskUtils.area(rle)  # float
+
+
+def visualize_annotation(image_path, label_path):
+    img = cv2.imread(str(image_path))
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    
+    with open(label_path) as f:
+        lines = f.readlines()
+    
+    plt.figure(figsize=(12, 8))
+    plt.imshow(img)
+    
+    for line in lines:
+        parts = line.strip().split()
+        class_id = int(parts[0])
+        points = np.array([list(map(float, p.split(','))) for p in parts[1:]])
+        points[:, 0] *= img.shape[1]
+        points[:, 1] *= img.shape[0]
+        
+        plt.plot(points[:, 0], points[:, 1], 'r-', linewidth=2)
+        plt.scatter(points[:, 0], points[:, 1], s=40, c='blue')
+        plt.title(f'Class {class_id}', fontsize=14)
+    
+    plt.axis('off')
+    plt.show()

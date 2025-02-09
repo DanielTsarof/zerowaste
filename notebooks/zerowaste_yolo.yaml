@@ -1,0 +1,13 @@
+path: /home/dtsarev/master_of_cv/sem3/DL_project/zerowaste/notebooks/zero_waste_yolo/
+train: train
+val: val
+#test: test  # если есть тестовый набор
+
+# Веса классов (обратно пропорциональные частоте)
+cls: [0.08, 0.21, 0.86, 3.76]  # cardboard, soft_plastic, rigid_plastic, metal
+
+names:
+  0: cardboard
+  1: soft_plastic
+  2: rigid_plastic
+  3: metal
